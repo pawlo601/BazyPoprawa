@@ -44,7 +44,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Client\Address.cs" />
+    <Compile Include="Model\Client\Contact.cs" />
+    <Compile Include="Model\Client\NIP.cs" />
+    <Compile Include="Model\Client\Regon.cs" />
+    <Compile Include="Model\Product\Currencies.cs" />
+    <Compile Include="Model\Product\Currency.cs" />
+    <Compile Include="Model\Product\Money.cs" />
+    <Compile Include="Model\Product\Price.cs" />
+    <Compile Include="Model\Product\Product.cs" />
+    <Compile Include="Model\Product\Repositories\IProductRepositories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\Invoice\" />
+    <Folder Include="Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
