@@ -35,6 +35,12 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\..\Bazy\Faktury\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\..\Bazy\Faktury\packages\NHibernate.3.3.3.4000\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,9 +51,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Client\Address.cs" />
+    <Compile Include="Model\Client\Client.cs" />
+    <Compile Include="Model\Client\Company.cs" />
     <Compile Include="Model\Client\Contact.cs" />
+    <Compile Include="Model\Client\Discount.cs" />
     <Compile Include="Model\Client\NIP.cs" />
     <Compile Include="Model\Client\Regon.cs" />
+    <Compile Include="Model\Client\Repositories\IClientRepositories.cs" />
+    <Compile Include="Model\Client\Repositories\ICompanyRepositories.cs" />
+    <Compile Include="Model\Invoice\Invoice.cs" />
+    <Compile Include="Model\Invoice\Item.cs" />
     <Compile Include="Model\Product\Currencies.cs" />
     <Compile Include="Model\Product\Currency.cs" />
     <Compile Include="Model\Product\Money.cs" />
@@ -57,8 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\Invoice\" />
-    <Folder Include="Service\" />
+    <Folder Include="Model\Invoice\Repositories\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
