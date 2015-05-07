@@ -54,7 +54,7 @@ namespace Invoices.Domain.Model.Client
         }
         public virtual string FormatString()
         {
-            return String.Format("ID produktu: {1}{0}Typ bonusu: {2}{0}Wartość zniżki: {3}{0}",
+            return String.Format("ID produktu: {1}{0}Typ bonusu: {2}{0}Wartość zniżki: {3}",
                         Environment.NewLine, 
                         IDProduct.ToString(), 
                         Type.ToString(), 

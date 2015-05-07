@@ -37,9 +37,13 @@ namespace Invoices.Domain.Model.Client
         }
         public virtual string FormatString()
         {
-            return "Ulica: " + Street + " " + NumberOfBuilding + "\n" +
-                    "Miejscowość: " + City + " " + Code + "\n" +
-                    "Państwo: " + Country + "\n";
+            return String.Format("{0}Ulica: {1}{0}Nr: {2}{0}Miejscowość: {3} {4}{0}Państwo: {5}",
+                                Environment.NewLine,
+                                Street,
+                                NumberOfBuilding,
+                                City,
+                                Code,
+                                Country);
         }
         public override string ToString()
         {

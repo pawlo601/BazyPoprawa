@@ -72,12 +72,14 @@ namespace Invoices.Domain.Model.Product
         }
         public virtual string FormatString()
         {
-            return String.Format("Produkt: {0}{4}{4}Typ: {1}{4}{4}Cena:{4}{2}{4}{4}Komentarz:{4}{3}",
+            string przewwa = "====================================";
+            return String.Format("Produkt: {0}{4}{5}{4}Typ: {1}{4}{5}{4}Cena:{4}{2}{4}{5}{4}Komentarz:{4}{3}{4}{5}",
                                         Name, 
                                         Type.ToString(), 
                                         Price.FormatString(), 
                                         Comments, 
-                                        Environment.NewLine
+                                        Environment.NewLine,
+                                        przewwa
                                         );
         }
         public override string ToString()

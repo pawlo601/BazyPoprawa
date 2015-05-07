@@ -37,7 +37,7 @@ namespace Invoices.Domain.Model.Invoice
         {
             this.Thing = product;
             ChangeVolume(vol);
-            Cost = new Product.Money(0.0f, Product.Waluta.PLN);
+            Cost = new Product.Money(product.Price.NetPrice.Value*vol, Product.Waluta.PLN);
             IdOfProduct = Thing.ID;
         }
         public virtual void ChangeVolume(int vol)
@@ -73,13 +73,17 @@ namespace Invoices.Domain.Model.Invoice
         }
         public virtual string FormatString()
         {
+            string przerwa="------------------------------------";
             string nazwaProduktu = "";
             if (Thing != null)
                 nazwaProduktu = Thing.Name;
-            string text = "Id produktu: " + IdOfProduct.ToString() + "\n" +
-                           "Nazwa produktu: " + nazwaProduktu + "\n" +
-                           "Ilość: " + Volume.ToString() + "\n" +
-                           "Wartość: " + Cost.Value.ToString() + Cost.NameOfCurrency.ToString() + "\n";
+            string text = String.Format("{1}{0}Id produktu: {2}{0}Nazwa produktu: {3}{0}Ilość: {4}{0}Wartość: {5}{0}",
+                                        Environment.NewLine,
+                                        przerwa,
+                                        IdOfProduct.ToString(),
+                                        nazwaProduktu,
+                                        Volume.ToString(),
+                                        Cost.Value.ToString() + Cost.NameOfCurrency.ToString());
             return text;
         }
         public override string ToString()

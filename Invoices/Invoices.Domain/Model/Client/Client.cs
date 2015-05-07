@@ -45,6 +45,16 @@ namespace Invoices.Domain.Model.Client
                 System.Threading.Thread.Sleep(50);
             }
         }
+        public virtual void AddSomeContacts()
+        {
+            Random rand = new Random();
+            int j = rand.Next(1, 6);
+            for (int i = 0; i < j; i++)
+            {
+                ListOfContact.Add(new Contact());
+                System.Threading.Thread.Sleep(50);
+            }
+        }
         public virtual void AddDiscount(Discount dis)
         {
             ListOfDiscount.Add(dis);
@@ -57,17 +67,22 @@ namespace Invoices.Domain.Model.Client
         {
             string text = String.Format("ID klienta: {1}{0}", Environment.NewLine, ID.ToString()) +
                                     "====================================" +
-                                    String.Format("Dane:{0}{1}", Environment.NewLine, Name + " " + Surname) +
+                                    String.Format("{0}Dane:{0}{0}{1}{0}", Environment.NewLine, Name + " " + Surname) +
                                     "====================================" +
-                                    String.Format("Adres:{0}{0}{1}", Environment.NewLine, Localisation.FormatString()) +
+                                    String.Format("{0}Adres:{0}{1}{0}", Environment.NewLine, Localisation.FormatString()) +
                                     "====================================" +
-                                    String.Format("Kontakty:{0}", Environment.NewLine);
+                                    String.Format("{0}Kontakty:{0}", Environment.NewLine);
             foreach (Contact a in ListOfContact)
-                text += a.FormatString() + "------------------------------------\n";
-                              text+="====================================" +
-                                    String.Format("Zniżki:{0}", Environment.NewLine);
+                text += String.Format("{0}------------------------------------{0}{1}", 
+                                       Environment.NewLine, 
+                                       a.FormatString());
+            text += String.Format("{0}===================================={0}",
+                    Environment.NewLine) +
+                                    String.Format("Zniżki:{0}{0}", Environment.NewLine);
             foreach (Discount a in ListOfDiscount)
-                text += a.FormatString() + "------------------------------------";
+                text += String.Format("------------------------------------{0}{1}{0}", Environment.NewLine, a.FormatString());
+            text += String.Format("===================================={0}",
+                    Environment.NewLine);
             return text;
         }
         public override string ToString()

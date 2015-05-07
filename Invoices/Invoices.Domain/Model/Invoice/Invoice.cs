@@ -63,9 +63,9 @@ namespace Invoices.Domain.Model.Invoice
         }
         private string CreateID()
         {
-            return "FAK/" + DateOfCreate.DayOfYear.ToString() + "/" +
-                    DateOfCreate.Hour.ToString() + "/" + DateOfCreate.Minute.ToString() +
-                    "/" + (DateOfCreate.Second + DateOfCreate.Millisecond).ToString();
+            return "FAK." + DateOfCreate.DayOfYear.ToString() + "." +
+                    DateOfCreate.Hour.ToString() + "." + DateOfCreate.Minute.ToString() +
+                    "." + (DateOfCreate.Second + DateOfCreate.Millisecond).ToString();
         }
         public virtual void SetComments(string comm)
         {
@@ -166,20 +166,21 @@ namespace Invoices.Domain.Model.Invoice
             string text = "";
             foreach (Item a in ListOfProducts)
             {
-                text += a.Thing.Name + "\n";
+                text += String.Format("{1}{0}", Environment.NewLine, a.FormatString());
             }
             return text;
         }
         public virtual string FormatString()
         {
+            string przerwa = "====================================";
             string stringCon = "---";
             if (Contractor != null)
                 stringCon = Contractor.FormatString();
             string pr = "";
             foreach (Item a in ListOfProducts)
                 pr += a.FormatString() + "\n";
-            string text = String.Format("ID: {1}{0}Title: {2}{0}Date of create: {3}{0}Właściciel:{0}{0}{4}{0}List of Productds:{0}{0}{5}{0}Comments:{0}{6}",
-                Environment.NewLine, ID, Title, DateOfCreate.ToString(), stringCon, pr, Comments);
+            string text = String.Format("ID: {1}{0}{7}{0}Title: {2}{0}{7}{0}Date of create: {3}{0}{7}{0}Właściciel:{0}{0}{4}{0}{7}{0}List of Productds:{0}{0}{5}{0}{7}{0}Comments:{0}{6}{0}{7}{0}",
+                Environment.NewLine, ID, Title, DateOfCreate.ToString(), stringCon, pr, Comments,przerwa);
             return text;
         }
         public override string ToString()
