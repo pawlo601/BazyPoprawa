@@ -35,6 +35,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\..\..\Users\Paweł\Desktop\nhibernate\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,7 +47,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientService.cs" />
+    <Compile Include="IClientService.cs" />
+    <Compile Include="IInvoiceServices.cs" />
+    <Compile Include="InvoiceService.cs" />
+    <Compile Include="IProductService.cs" />
+    <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Finance.Infrastructure\Finance.Infrastructure.csproj">
+      <Project>{ccd1e59b-f45e-4eb9-8f81-9c9d02a23af6}</Project>
+      <Name>Finance.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Invoices.Domain\Finance.Domain.csproj">
+      <Project>{f83009d7-2e27-49c5-9b3a-cb562a15a8fa}</Project>
+      <Name>Finance.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -12,11 +12,12 @@ namespace Invoices.Domain.Model.Client.Repositories
     {
         void InsertCompany(Company client);
         void DeleteCompany(int id);
-        Company FindId(int Id);
+        Company FindID(int Id);
         Company FindNip(NIP nip);
         Company FindRegon(Regon regon);
-        collections.List<Company> FindName(string name);
-        collections.List<Company> FindAll();
-        iesi.ISet<Discount> GetAllDiscount(int IdClient);
+        collections.List<Company> FindNameC(string name);
+        collections.List<Company> FindAllC();
+        iesi.ISet<Discount> GetAllDiscountC(int id);
+        iesi.ISet<Contact> GetAllContactsC(int id);
     }
 }

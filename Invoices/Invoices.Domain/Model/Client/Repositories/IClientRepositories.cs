@@ -15,6 +15,7 @@ namespace Invoices.Domain.Model.Client.Repositories
         Client FindId(int Id);
         collections.List<Client> FindName(string name, string surname);
         collections.List<Client> FindAll();
-        iesi.ISet<Discount> GetAllDiscount(int IdClient);
+        iesi.ISet<Discount> GetAllDiscount(int id);
+        iesi.ISet<Contact> GetAllContacts(int id);
     }
 }

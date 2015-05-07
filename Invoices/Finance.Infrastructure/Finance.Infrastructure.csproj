@@ -35,6 +35,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\..\..\Users\Paweł\Desktop\nhibernate\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,11 +48,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ClientIM.cs" />
+    <Compile Include="Repositories\InvoiceIM.cs" />
+    <Compile Include="Repositories\ProductIM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataBase\" />
     <Folder Include="Mapping\" />
-    <Folder Include="Repositories\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Invoices.Domain\Finance.Domain.csproj">
+      <Project>{f83009d7-2e27-49c5-9b3a-cb562a15a8fa}</Project>
+      <Name>Finance.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
