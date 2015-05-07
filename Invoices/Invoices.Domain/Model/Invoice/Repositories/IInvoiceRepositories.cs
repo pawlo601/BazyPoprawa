@@ -13,8 +13,6 @@ namespace Invoices.Domain.Model.Invoice.Repositories
         Invoice Find(string Id);
         List<Invoice> FindAll();
         List<Invoice> FindAllPerContractor(int idOfContractor);
-        List<Invoice> FindAllPerContractor(string nameCompany);
-        List<Invoice> FindAllPerContractor(string name, string surname);
         List<Invoice> FindAllPerData(DateTime date);
     }
 }

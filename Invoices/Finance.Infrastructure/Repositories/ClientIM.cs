@@ -170,6 +170,5 @@ namespace Finance.Infrastructure.Repositories
             }
             return null;
         }
-
     }
 }

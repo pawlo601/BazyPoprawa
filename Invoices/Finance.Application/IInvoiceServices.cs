@@ -14,8 +14,6 @@ namespace Finance.Application
         void CreateInvoice(string id);
         void SendToMailInvoice(string id);
         void SendToMailInvoice(string id, MailAddress to);
-        collections.List<Invoice> GetAllPerClient(string name, string surname);
-        collections.List<Invoice> GetAllPerCompany(string name);
         collections.List<Invoice> GetAllPerIDC(int id);
         collections.List<Invoice> GetAllPerDate(DateTime p);
         collections.List<Invoice> GetAllPerDateToDate(DateTime from, DateTime to);

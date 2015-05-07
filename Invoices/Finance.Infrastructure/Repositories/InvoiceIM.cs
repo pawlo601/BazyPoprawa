@@ -69,30 +69,6 @@ namespace Finance.Infrastructure.Repositories
             }
             return lista;
         }
-        public collections.List<Invoice> FindAllPerContractor(string nameCompany)
-        {
-            collections.List<Invoice> lista = new collections.List<Invoice>();
-            foreach (var a in invoices)
-            {
-                if (a.Contractor is Company&&nameCompany == a.Contractor.Name)
-                {
-                    lista.Add(a);
-                }
-            }
-            return lista;
-        }
-        public collections.List<Invoice> FindAllPerContractor(string name, string surname)
-        {
-            collections.List<Invoice> lista = new collections.List<Invoice>();
-            foreach (var a in invoices)
-            {
-                if (a.Contractor is Client && name == a.Contractor.Name&&surname==a.Contractor.Surname)
-                {
-                    lista.Add(a);
-                }
-            }
-            return lista;
-        }
         public collections.List<Invoice> FindAllPerData(DateTime date)
         {
             collections.List<Invoice> lista = new collections.List<Invoice>();

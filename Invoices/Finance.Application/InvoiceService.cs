@@ -58,14 +58,6 @@ namespace Finance.Application
             }
             return a;
         }
-        public collections.List<Invoice> GetAllPerClient(string name, string surname)
-        {
-            return repo.FindAllPerContractor(name, surname);
-        }
-        public collections.List<Invoice> GetAllPerCompany(string name)
-        {
-            return repo.FindAllPerContractor(name);
-        }
         public collections.List<Invoice> GetAllPerIDC(int id)
         {
             return repo.FindAllPerContractor(id);
