@@ -35,7 +35,7 @@ namespace Invoices.Domain.Model.Product
         }
         public virtual Money GetGross()
         {
-            return new Money(VAT * NetPrice.Value, NetPrice.NameOfCurrency);
+            return new Money((VAT+1.0f) * NetPrice.Value, NetPrice.NameOfCurrency);
         }
         public virtual void ChangeCurrency(Waluta nowa)
         {

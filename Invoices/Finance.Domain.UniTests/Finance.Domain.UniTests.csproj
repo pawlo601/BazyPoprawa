@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\..\..\Users\Paweł\Desktop\nhibernate\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -50,7 +53,20 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ClientTest.cs" />
+    <Compile Include="InvoiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProductTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Finance.ObjectMothers\Finance.ObjectMothers.csproj">
+      <Project>{56f8894d-5604-4aa2-95aa-7ba3e754b915}</Project>
+      <Name>Finance.ObjectMothers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Invoices.Domain\Finance.Domain.csproj">
+      <Project>{f83009d7-2e27-49c5-9b3a-cb562a15a8fa}</Project>
+      <Name>Finance.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
