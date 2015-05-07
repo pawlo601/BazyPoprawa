@@ -35,7 +35,7 @@ namespace Invoices.Domain.Model.Client
             Code = code;
             Country = country;
         }
-        public string FormatString()
+        public virtual string FormatString()
         {
             return "Ulica: " + Street + " " + NumberOfBuilding + "\n" +
                     "Miejscowość: " + City + " " + Code + "\n" +

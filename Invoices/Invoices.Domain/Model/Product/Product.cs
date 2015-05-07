@@ -55,22 +55,22 @@ namespace Invoices.Domain.Model.Product
             this.Price = price;
             Comments = "Brak komentarza";
         }
-        public void SetComments(string comm)
+        public virtual void SetComments(string comm)
         {
             if (comm.Length > 250)
                 this._comments = comm.Substring(0, 250);
             else
                 this._comments = comm;
         }
-        public Waluta GetCurrency()
+        public virtual Waluta GetCurrency()
         {
             return Price.NetPrice.NameOfCurrency;
         }
-        public void ChangeCurrency(Waluta a)
+        public virtual void ChangeCurrency(Waluta a)
         {
             Price.ChangeCurrency(a);
         }
-        public string FormatString()
+        public virtual string FormatString()
         {
             return String.Format("Produkt: {0}{4}{4}Typ: {1}{4}{4}Cena:{4}{2}{4}{4}Komentarz:{4}{3}",
                                         Name, 

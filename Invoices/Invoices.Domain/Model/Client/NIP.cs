@@ -40,7 +40,7 @@ namespace Invoices.Domain.Model.Client
                     throw new Exception("Błąd w NIP-ie. Niepoprawne znaczenie.\n");
             }
         }
-        public string FormatString()
+        public virtual string FormatString()
         {
             return "NIP: " + this.NumberNIP;
         }

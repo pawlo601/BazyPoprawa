@@ -33,15 +33,15 @@ namespace Invoices.Domain.Model.Product
         {
 
         }
-        public Money GetGross()
+        public virtual Money GetGross()
         {
             return new Money(VAT * NetPrice.Value, NetPrice.NameOfCurrency);
         }
-        public void ChangeCurrency(Waluta nowa)
+        public virtual void ChangeCurrency(Waluta nowa)
         {
             NetPrice = new Money(NetPrice.GetValueIn(nowa), nowa);
         }
-        public string FormatString()
+        public virtual string FormatString()
         {
             return String.Format("Cena netto :{0}{3}Cena brutto :{1}{3}Vat: {2}%",
                                     NetPrice.ToString(), 

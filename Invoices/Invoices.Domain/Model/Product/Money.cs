@@ -47,11 +47,11 @@ namespace Invoices.Domain.Model.Product
                 Curr = Currencies.GetInstance();
             }
         }
-        public void RefreshCurrencies()
+        public virtual void RefreshCurrencies()
         {
             this.Curr.Refresh();
         }
-        public void ChengeCurrency(Waluta curr)
+        public virtual void ChengeCurrency(Waluta curr)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace Invoices.Domain.Model.Product
                 throw e;
             }
         }
-        public float GetValueIn(Waluta waluta)
+        public virtual float GetValueIn(Waluta waluta)
         {
             if (waluta == NameOfCurrency)
                 return Value;
@@ -84,7 +84,7 @@ namespace Invoices.Domain.Model.Product
         {
             return String.Format("{0} {1}", Value, NameOfCurrency);
         }
-        public string FormatString()
+        public virtual string FormatString()
         {
             return "Wartość: " + Value.ToString() + NameOfCurrency.ToString();
         }

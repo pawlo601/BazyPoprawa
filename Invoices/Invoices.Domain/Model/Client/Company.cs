@@ -27,7 +27,7 @@ namespace Invoices.Domain.Model.Client
             Nip = nip;
             Regon = regon;
         }
-        public virtual string FormatString()
+        public override string FormatString()
         {
             string text = String.Format("ID firmy: {1}{0}", Environment.NewLine, ID.ToString()) +
                                     "====================================" +

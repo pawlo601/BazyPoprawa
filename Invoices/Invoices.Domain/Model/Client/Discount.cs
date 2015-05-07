@@ -9,9 +9,9 @@ namespace Invoices.Domain.Model.Client
     public enum Bonus { Zniżka, Netto };
     public class Discount
     {
-        public int IDProduct { get; set; }
-        public Bonus Type { get; set; }
-        public float ValueOfBonus { get; set; }
+        public virtual int IDProduct { get; set; }
+        public virtual Bonus Type { get; set; }
+        public virtual float ValueOfBonus { get; set; }
 
         public Discount()
         {
@@ -37,7 +37,7 @@ namespace Invoices.Domain.Model.Client
             else
                 ValueOfBonus = bonus;
         }
-        public void ChangeType(Bonus type, float bonus)
+        public virtual void ChangeType(Bonus type, float bonus)
         {
             if (type != Bonus.Zniżka)
                 this.ValueOfBonus = 0.0f;
@@ -45,14 +45,14 @@ namespace Invoices.Domain.Model.Client
                 this.ValueOfBonus = bonus;
             this.Type = type;
         }
-        public void ChangeBonus(float bonus)
+        public virtual void ChangeBonus(float bonus)
         {
             if (bonus >= 0.0f && bonus < 1.0f)
                 ValueOfBonus = bonus;
             else
                 throw new Exception("Niewłaściwy bonus.\n");
         }
-        public string FormatString()
+        public virtual string FormatString()
         {
             return String.Format("ID produktu: {1}{0}Typ bonusu: {2}{0}Wartość zniżki: {3}{0}",
                         Environment.NewLine, 

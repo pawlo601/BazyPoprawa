@@ -77,7 +77,7 @@ namespace Invoices.Domain.Model.Client
             else
                 throw new Exception("Błąd w Regonie-ie. Błędne znaczenie\n");
         }
-        public string FormatString()
+        public virtual string FormatString()
         {
             return "Regon: " + this.NumberRegon;
         }
