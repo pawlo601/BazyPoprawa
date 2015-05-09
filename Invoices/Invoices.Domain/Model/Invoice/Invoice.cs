@@ -4,7 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using iesi = Iesi.Collections.Generic;
+/*
+drop table INVOICE
 
+CREATE TABLE [dbo].[INVOICE](
+	[id] [varchar](50) NOT NULL,
+	[title] [varchar](50) NOT NULL,
+	[date] [datetime] NOT NULL,
+	[idClient] [int] NOT NULL,
+    [comments] [varchar](250) NOT NULL,
+ CONSTRAINT [PK_INVOICE] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+*/
 namespace Invoices.Domain.Model.Invoice
 {
     public class Invoice
@@ -23,9 +42,33 @@ namespace Invoices.Domain.Model.Invoice
         }
         private string _title;
         public virtual DateTime DateOfCreate { get; set; }
-        public virtual int IdClient { get; set; }
+        public virtual int IdClient 
+        {
+            get
+            {
+                return _idClient; 
+            }
+            set
+            {
+                _idClient = value;
+                _contractor.ID = value;
+            }
+        }
+        private int _idClient;
         public virtual iesi.ISet<Item> ListOfProducts { get; set; }
-        public Client.Client Contractor { get; set; }
+        public Client.Client Contractor 
+        {
+            get
+            {
+                return _contractor;
+            }
+            set
+            {
+                _contractor = value;
+                _idClient = value.ID;
+            }
+        }
+        private Client.Client _contractor;
         public virtual string Comments
         {
             get
@@ -48,7 +91,6 @@ namespace Invoices.Domain.Model.Invoice
             ID = CreateID();
             Title = "Tytul" + rand.Next(1, 100000).ToString();
             Contractor = new Client.Client();
-            IdClient = rand.Next(1, 100);
             ListOfProducts = new iesi.HashedSet<Item>();
             Comments = "Brak komentarza";
         }
@@ -63,9 +105,12 @@ namespace Invoices.Domain.Model.Invoice
         }
         private string CreateID()
         {
+            string a = Guid.NewGuid().ToString();
+            a = a.Substring(a.Length - 5, 5);
             return "FAK." + DateOfCreate.DayOfYear.ToString() + "." +
                     DateOfCreate.Hour.ToString() + "." + DateOfCreate.Minute.ToString() +
-                    "." + (DateOfCreate.Second + DateOfCreate.Millisecond).ToString();
+                    "." + (DateOfCreate.Second).ToString() + "." + a;
+            
         }
         public virtual void SetComments(string comm)
         {

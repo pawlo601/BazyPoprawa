@@ -4,7 +4,19 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+/*
+drop table CONTACTS
+go
 
+CREATE TABLE [dbo].[CONTACTS](
+	[ID_Client] [int] NOT NULL,
+	[contact] [varchar](50) NULL
+)
+GO
+
+SET ANSI_PADDING OFF
+GO
+ */
 namespace Invoices.Domain.Model.Client
 {
     public class Contact
@@ -13,7 +25,7 @@ namespace Invoices.Domain.Model.Client
         public Contact()
         {
             Random rand = new Random();
-            int a = rand.Next(0, 1);
+            int a = rand.Next(0, 2);
             if (a == 0)
                 ContactTo = "123456789";
             else

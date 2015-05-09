@@ -3,7 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+/*
+drop table LOCALISATION
+go
 
+CREATE TABLE [dbo].[LOCALISATION](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[street] [varchar](50) NOT NULL,
+    [nr] [varchar](10) NOT NULL,
+    [city] [varchar](50) NOT NULL,
+    [code] [varchar](50) NOT NULL,
+    [country] [varchar](50) NOT NULL
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+ */
 namespace Invoices.Domain.Model.Client
 {
     public class Address

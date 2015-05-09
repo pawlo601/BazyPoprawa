@@ -7,6 +7,24 @@ using System.Threading.Tasks;
 namespace Invoices.Domain.Model.Product
 {
     public enum Waluta {PLN,EUR,USD};
+
+    public static class Extension
+    {
+        public static double GetExchange(this Waluta wal)
+        {
+            switch (wal)
+            {
+                case Waluta.PLN:
+                    return 1.0f;
+                case Waluta.EUR:
+                    return 4.0547962f;
+                case Waluta.USD:
+                    return 3.6130953f;
+                default:
+                    return -1.0f;
+            }
+        }
+    }
     public class Money
     {
         public virtual float Value { get; set; }
@@ -16,7 +34,7 @@ namespace Invoices.Domain.Model.Product
         public Money()
         {
             Random rand = new Random();
-            Value = (float)(rand.Next(100, 100000) / 1000);
+            Value = (rand.Next(100, 100000) / 1000.0f);
             int a = rand.Next(0, 3);
             switch (a)
             {

@@ -3,7 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+/*
+drop table PRODUCT
+go
 
+CREATE TABLE [dbo].[PRODUCT](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NOT NULL,
+    [type] [varchar](10) NOT NULL,
+	[value] [float] NULL,
+    [nameofcurrency] [varchar](50) NOT NULL,
+    [vat] [float] NOT NULL,
+    [comment] [varchar](250) NULL
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+ */
 namespace Invoices.Domain.Model.Product
 {
     public enum TypProduktu { Przedmiot, Usługa };

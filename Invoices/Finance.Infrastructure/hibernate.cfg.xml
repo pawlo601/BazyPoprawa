@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-configuration  xmlns="urn:nhibernate-configuration-2.2" >
+  <session-factory>
+    <property name="connection.driver_class">NHibernate.Driver.SqlClientDriver</property>
+    <property name="connection.connection_string">Data Source=DELL\SQLEXPRESS;Initial Catalog=Data;Integrated Security=True</property>
+    <property name="dialect">NHibernate.Dialect.MsSql2008Dialect</property>
+    <property name="show_sql">false</property>
+    <property name="format_sql">false</property>
+    <property name="use_sql_comments">false</property>
+    <mapping file="C:\Documents\BazyPoprawa\Invoices\Finance.Infrastructure\Mapping\Currency\Currency.hbm.xml" />
+    <mapping file="C:\Documents\BazyPoprawa\Invoices\Finance.Infrastructure\Mapping\Product\Product.hbm.xml" />
+    <mapping file="C:\Documents\BazyPoprawa\Invoices\Finance.Infrastructure\Mapping\Client\Address.hbm.xml" />
+    <mapping file="C:\Documents\BazyPoprawa\Invoices\Finance.Infrastructure\Mapping\Client\Client.hbm.xml" />
+    <mapping file="C:\Documents\BazyPoprawa\Invoices\Finance.Infrastructure\Mapping\Client\Company.hbm.xml" />
+    <mapping file="C:\Documents\BazyPoprawa\Invoices\Finance.Infrastructure\Mapping\Invoice\Invoice.hbm.xml" />
+  </session-factory>
+</hibernate-configuration>

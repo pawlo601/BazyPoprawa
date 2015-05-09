@@ -22,13 +22,13 @@ namespace Invoices.Domain.Model.Product
         {//from Internet
             this.GetCurrencyFromDataBase(new List<Currency>());
 
-            Currency dol = new Currency(Waluta.USD, 3.0f);
+            Currency dol = new Currency(Waluta.USD, Waluta.USD.GetExchange());
             ListOfCurrency.Add(dol);
 
-            Currency eur = new Currency(Waluta.EUR, 4.0f);
+            Currency eur = new Currency(Waluta.EUR, Waluta.EUR.GetExchange());
             ListOfCurrency.Add(eur);
 
-            Currency pln = new Currency(Waluta.PLN, 1.0f);
+            Currency pln = new Currency(Waluta.PLN, Waluta.PLN.GetExchange());
             ListOfCurrency.Add(pln);
         }
         public void GetCurrencyFromDataBase(List<Currency> a)

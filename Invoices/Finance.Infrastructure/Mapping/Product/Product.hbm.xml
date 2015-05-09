@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" default-lazy="false" namespace="Invoices.Domain.Model.Product" assembly="Invoices.Domain">
+  <class name="Product" table="PRODUCT">
+    <id name="ID" type="int" column="id">
+      <generator class="native" />
+    </id>
+    <property name="Name" type="string" column="name" />
+    <property type="Finance.Infrastructure.Mapping.Product.TypProduktuType, Finance.Infrastructure" name="Type" column="type"/>
+    <component name="Price" class="Price">
+      <component name="NetPrice" class="Money">
+        <property name="Value" column="value"/>
+        <property type="Finance.Infrastructure.Mapping.Currency.WalutaType, Finance.Infrastructure" name="NameOfCurrency" column="nameofcurrency" />
+      </component>
+      <property name="VAT" column="vat" />
+    </component>
+    <property name="Comments" type="string" column="comment"/>
+  </class>
+</hibernate-mapping>

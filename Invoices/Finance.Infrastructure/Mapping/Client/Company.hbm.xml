@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" default-lazy="false" namespace="Invoices.Domain.Model.Client" assembly="Invoices.Domain">
+  <class name="Company" table="COMPANY">
+    <id name="ID" type="int" column="id">
+      <generator class="native" />
+    </id>
+    <property name="Name" type="string" column="name" />
+    <property name="Surname" type="string" column="surname" />
+    <component name="Nip" class="NIP">
+      <property name="NumberNIP" />
+    </component>
+    <component name="Regon" class="Regon">
+      <property name="NumberRegon"/>
+    </component>
+    <many-to-one name="Localisation" class="Address" column="address" cascade="all" unique="true"/>
+    <set name="ListOfContact" lazy="false" order-by="lower(ContactTo) asc" table="CONTACTS">
+      <key column="ID_Client"/>
+      <composite-element class="Contact">
+        <property name="ContactTo" type="string" column="contact"/>
+      </composite-element>
+    </set>
+    <set name="ListOfDiscount" lazy="false" order-by="lower(IDProduct) asc" table="DISCOUNTS">
+      <key column="ID_Client"/>
+      <composite-element class="Discount">
+        <property name="IDProduct" type="int" column="idProduct"/>
+        <property name="ValueOfBonus" type="float" column="valueOfBonus"/>
+        <property type="Finance.Infrastructure.Mapping.Client.BonusType, Finance.Infrastructure" name="Type" column="type"/>
+      </composite-element>
+    </set>
+  </class>
+</hibernate-mapping>

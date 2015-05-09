@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Invoices.Domain.Model.Product" assembly="Invoices.Domain">
+  <class name="Currency" table="CURRENCY">
+    <id name="ID" column="id">
+      <generator class="native" />
+    </id>
+    <property type="Finance.Infrastructure.Mapping.Currency.WalutaType, Finance.Infrastructure" name="Name" column="name"/>
+    <property name="ExchangeInTheRelationToPLN" column="exchange"/>
+  </class>
+</hibernate-mapping>

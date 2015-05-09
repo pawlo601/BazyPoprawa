@@ -3,7 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+/*
+drop table CURRENCY
+go
 
+CREATE TABLE [dbo].[CURRENCY](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](5) NULL,
+	[exchange] [float] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+ */
 namespace Invoices.Domain.Model.Product
 {
     public class Currency
@@ -27,7 +45,7 @@ namespace Invoices.Domain.Model.Product
         {
             return ID.ToString() + " " + Name.ToString() + " " + ExchangeInTheRelationToPLN.ToString();
         }
-        public string FormatString()
+        public virtual string FormatString()
         {
             return String.Format("ID: {0}\nWaluta: {1}\nExchange: {2}", ID.ToString(), Name.ToString(), ExchangeInTheRelationToPLN.ToString());
         }

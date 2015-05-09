@@ -3,7 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+/*
+drop table DISCOUNTS
+go
 
+CREATE TABLE [dbo].[DISCOUNTS](
+	[ID_Client] [int] NOT NULL,
+    [idProduct] [int] NOT NULL,
+    [valueOfBonus] [float] NOT NULL,
+    [type] [varchar](15) NULL
+)
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+ */
 namespace Invoices.Domain.Model.Client
 {
     public enum Bonus { Zniżka, Netto };
@@ -18,10 +33,15 @@ namespace Invoices.Domain.Model.Client
             Random rand = new Random();
             IDProduct = rand.Next(1, 1000);
             if (rand.Next(0, 100) > 50)
+            {
                 Type = Bonus.Netto;
+                ValueOfBonus = 0.0f;
+            }
             else
+            {
                 Type = Bonus.Zniżka;
-            ValueOfBonus = (float)(rand.NextDouble());
+                ValueOfBonus = (float)(rand.NextDouble());
+            }
         }
         public Discount(int idProduct, Bonus type)
         {

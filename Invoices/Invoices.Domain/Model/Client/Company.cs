@@ -3,7 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+/*
+drop table COMPANY
+go
 
+CREATE TABLE [dbo].[COMPANY](
+	[id] [int] IDENTITY(2,2) NOT NULL,
+	[name] [varchar](50) NULL,
+    [surname] [varchar](50) NULL,
+    [address] [int] NOT NULL,
+    [NumberNIP] [varchar](20) NULL,
+    [NumberRegon] [varchar](20) NULL
+PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+ */
 namespace Invoices.Domain.Model.Client
 {
     public class Company:Client

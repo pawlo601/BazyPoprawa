@@ -4,7 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
+drop table ITEMS
+go
 
+CREATE TABLE [dbo].[ITEMS](
+	[ID_Invoice] [varchar](50) NOT NULL,
+    [idProduct] [int] NOT NULL,
+    [volume] [int] NOT NULL,
+    [value] [float] NULL,
+    [nameofcurrency] [varchar](5)
+)
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+ */
 namespace Invoices.Domain.Model.Invoice
 {
     public class Item
@@ -22,7 +38,46 @@ namespace Invoices.Domain.Model.Invoice
             }
         }
         private int _volume;
-        public virtual Product.Money Cost { get; set; }
+        public virtual float Value 
+        {
+            get
+            {
+                return _value;
+            }
+            set
+            {
+                _value = value;
+                _cost.Value = value;
+            }
+        }
+        private float _value;
+        public virtual Product.Waluta NameOfCurrency
+        {
+            get
+            {
+                return _nameOfCurrency;
+            }
+            set
+            {
+                _nameOfCurrency = value;
+                _cost.NameOfCurrency = value;
+            }
+        }
+        private Product.Waluta _nameOfCurrency;
+        public Product.Money Cost 
+        { 
+            get
+            {
+                return _cost;
+            }
+            set
+            {
+                _cost = value;
+                _value = value.Value;
+                _nameOfCurrency = value.NameOfCurrency;
+            }
+        }
+        private Product.Money _cost;
         public Product.Product Thing { get; set; }
 
         public Item()
