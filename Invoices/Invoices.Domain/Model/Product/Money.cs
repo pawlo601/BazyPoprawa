@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Practices.EnterpriseLibrary.Validation;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
 
 namespace Invoices.Domain.Model.Product
 {
@@ -25,6 +27,7 @@ namespace Invoices.Domain.Model.Product
             }
         }
     }
+    [HasSelfValidation]
     public class Money
     {
         public virtual float Value { get; set; }
@@ -106,6 +109,11 @@ namespace Invoices.Domain.Model.Product
         {
             return "Wartość: " + Value.ToString() + NameOfCurrency.ToString();
         }
-
+        [SelfValidation]
+        public virtual void ValueValidation(ValidationResults results)
+        {
+            if (Value <= 0.0f)
+                results.AddResult(new ValidationResult("Wartość powinna być większa od zera", this, "ValueValidation", string.Empty, null));
+        }
     }
 }

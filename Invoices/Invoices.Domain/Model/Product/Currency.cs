@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Practices.EnterpriseLibrary.Validation;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
 /*
 drop table CURRENCY
 go
@@ -48,6 +50,12 @@ namespace Invoices.Domain.Model.Product
         public virtual string FormatString()
         {
             return String.Format("ID: {0}\nWaluta: {1}\nExchange: {2}", ID.ToString(), Name.ToString(), ExchangeInTheRelationToPLN.ToString());
+        }
+        [SelfValidation]
+        public virtual void ExchangeInTheRelationToPLNValidation(ValidationResults results)
+        {
+            if (ExchangeInTheRelationToPLN <= 0.0f)
+                results.AddResult(new ValidationResult("Kurs wymiany powinien być większy od zera", this, "ExchangeInTheRelationToPLNValidation", string.Empty, null));
         }
     }
 }

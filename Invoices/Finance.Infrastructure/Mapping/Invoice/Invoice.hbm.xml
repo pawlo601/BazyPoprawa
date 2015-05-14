@@ -5,7 +5,7 @@
     <property name="Title" type="string" column="title"/>
     <property name="DateOfCreate" column="date"/>
     <property name="IdClient" type="int" column="idClient"/>
-    <set name="ListOfProducts" lazy="false" order-by="lower(IdOfProduct) asc" table="ITEMS" >
+    <set name="ListOfProducts" lazy="true" order-by="lower(IdOfProduct) asc" table="ITEMS" >
       <key column="ID_Invoice"/>
       <composite-element class="Item">
         <property name="IdOfProduct" type="int" column="idOfProduct"/>

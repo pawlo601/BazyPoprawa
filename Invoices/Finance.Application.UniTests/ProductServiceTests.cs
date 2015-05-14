@@ -35,7 +35,7 @@ namespace Finance.Application.UniTests
             ProductService a = new ProductService();
             Money b = new Money(12.0f, Waluta.EUR);
             Money c = a.Exchange(b, Waluta.PLN);
-            Assert.AreEqual(c.Value, 48.0f);
+            Assert.AreEqual(c.Value, 12 * 4.0547962f);
             Assert.AreEqual(c.NameOfCurrency, Waluta.PLN);
         }
         [TestMethod]

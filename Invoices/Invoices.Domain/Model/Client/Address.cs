@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Practices.EnterpriseLibrary.Validation;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
 /*
 drop table LOCALISATION
 go
@@ -27,13 +29,23 @@ GO
  */
 namespace Invoices.Domain.Model.Client
 {
+    [HasSelfValidation]
     public class Address
     {
         public virtual int ID { get; set; }
+        [StringLengthValidator(5, 25, MessageTemplate = "Nazwa ulicy powinna mieć od 5 do 30 znaków")]
+        [RegexValidator("[A-Z]{1}[a-z]{4-24}", MessageTemplate = "Nazwa ulicy powinna zawierć same litery")]
         public virtual string Street { get; set; }
+        [StringLengthValidator(0, 10, MessageTemplate = "Numer budynku oraz mieszkania nie powinien przkraczać 10 znaków")]
         public virtual string NumberOfBuilding { get; set; }
+        [StringLengthValidator(5, 15, MessageTemplate = "Nazwa miejscowości powinna mieć od 5 do 15 znaków")]
+        [RegexValidator("[A-Z]{1}[a-z]{4-14}", MessageTemplate = "Nazwa miejscowości powinna zawierć same litery")]
         public virtual string City { get; set; }
+        [StringLengthValidator(6, 6, MessageTemplate = "Kod pocztowy powienien zawierać 6 znaków")]
+        [RegexValidator("[0-9]{2}-[0-9]{3}", MessageTemplate = "Kod pocztowy powien wyglądać: XX-XXX i zawierać same cyfry")]
         public virtual string Code { get; set; }
+        [StringLengthValidator(5, 15, MessageTemplate = "Nazwa państwa powinna mieć od 5 do 15 znaków")]
+        [RegexValidator("[A-Z]{1}[a-z]{4-14}", MessageTemplate = "Nazwa państwa powinna zawierć same litery")]
         public virtual string Country { get; set; }
 
         public Address()

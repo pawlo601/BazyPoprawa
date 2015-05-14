@@ -60,7 +60,7 @@ namespace Finance.Domain.UniTests
             a.ChangeCurrency(Waluta.PLN);
             float c = a.Price.NetPrice.Value;
             Money d = ProductObjectMothers.CreateMoneyPLN();
-            Assert.AreEqual(d.Curr.GetCourse(Waluta.EUR)*b,c);
+            Assert.AreEqual(Math.Round(d.Curr.GetCourse(Waluta.EUR)*b,2),Math.Round(c,2));
         }
         [TestMethod]
         public void GetGrossTest()

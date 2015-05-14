@@ -98,15 +98,20 @@ namespace Finance.Infrastructure.DataBase
                     Console.WriteLine(i);
             }
         }
+        public void AddLot(int howMany)
+        {
+            AddCurrencies();
+            AddProducts(howMany);
+            AddCompanies(howMany);
+            AddInvoices(howMany);
+        }
         public static void Main()
         {
-            DataBase a = new DataBase();
-            DateTime start = DateTime.Now;
-            //a.AddCurrencies();
-            //a.AddProducts(1000);
-            //a.AddCompanies(1000);
-            a.AddInvoices(1000);
-            Console.WriteLine((DateTime.Now - start).ToString());
+            InvoiceDataBaseIM a = new InvoiceDataBaseIM();
+            foreach (Invoice b in a.FindAllPerData(new DateTime(2015, 05, 14, 23, 04, 33)))
+                Console.WriteLine(b.FormatString());
+
+            
             Console.ReadKey();
         }
     }

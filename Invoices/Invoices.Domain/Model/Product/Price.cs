@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Practices.EnterpriseLibrary.Validation;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
 
 namespace Invoices.Domain.Model.Product
 {
+    [HasSelfValidation]
     public class Price
     {
         public virtual Money NetPrice { get; set; }
@@ -53,6 +56,18 @@ namespace Invoices.Domain.Model.Product
         public override string ToString()
         {
             return NetPrice.ToString() + " " + VAT.ToString();
+        }
+        [SelfValidation]
+        public void VATValidation(ValidationResults results)
+        {
+            if (VAT <= 0.0f&&VAT>=1.0f)
+                results.AddResult(new ValidationResult("Vat powinien być wiekszy od 0 i mniejszy od 1", this, "VATValidation", string.Empty, null));
+        }
+        [SelfValidation]
+        public virtual void NetPriceValidation(ValidationResults results)
+        {
+            if (NetPrice==null)
+                results.AddResult(new ValidationResult("Cena nie może być null-em", this, "NetPriceValidation", string.Empty, null));
         }
     }
 }

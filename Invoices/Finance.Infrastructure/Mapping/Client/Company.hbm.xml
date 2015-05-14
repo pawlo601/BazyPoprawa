@@ -13,13 +13,13 @@
       <property name="NumberRegon"/>
     </component>
     <many-to-one name="Localisation" class="Address" column="address" cascade="all" unique="true"/>
-    <set name="ListOfContact" lazy="false" order-by="lower(ContactTo) asc" table="CONTACTS">
+    <set name="ListOfContact" lazy="false" order-by="lower(contact) asc" table="CONTACTS">
       <key column="ID_Client"/>
       <composite-element class="Contact">
         <property name="ContactTo" type="string" column="contact"/>
       </composite-element>
     </set>
-    <set name="ListOfDiscount" lazy="false" order-by="lower(IDProduct) asc" table="DISCOUNTS">
+    <set name="ListOfDiscount" lazy="false" order-by="lower(idProduct) asc" table="DISCOUNTS">
       <key column="ID_Client"/>
       <composite-element class="Discount">
         <property name="IDProduct" type="int" column="idProduct"/>

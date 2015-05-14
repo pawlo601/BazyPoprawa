@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Practices.EnterpriseLibrary.Validation;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
 /*
 drop table DISCOUNTS
 go
@@ -22,6 +24,7 @@ GO
 namespace Invoices.Domain.Model.Client
 {
     public enum Bonus { Zniżka, Netto };
+    [HasSelfValidation]
     public class Discount
     {
         public virtual int IDProduct { get; set; }
@@ -86,6 +89,12 @@ namespace Invoices.Domain.Model.Client
             return IDProduct.ToString() + "\n" +
                    Type.ToString() + "\n" +
                    ValueOfBonus.ToString();
+        }
+        [SelfValidation]
+        public virtual void ValueOfBonusValidation(ValidationResults results)
+        {
+            if (ValueOfBonus < 0.0f && ValueOfBonus >= 1.0f)
+                results.AddResult(new ValidationResult("Bonus powinien być >= 0 i < 1", this, "ValueOfBonusValidation", string.Empty, null));
         }
     }
 }

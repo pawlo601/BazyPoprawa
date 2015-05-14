@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Practices.EnterpriseLibrary.Validation;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
 /*
 drop table CONTACTS
 go
@@ -19,8 +21,10 @@ GO
  */
 namespace Invoices.Domain.Model.Client
 {
+    [HasSelfValidation]
     public class Contact
     {
+        [StringLengthValidator(9, 30, MessageTemplate = "Kontakt powinien mieć od 9 do 30 znaków")]
         public virtual string ContactTo { get; set; }
         public Contact()
         {

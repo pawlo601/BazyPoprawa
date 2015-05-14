@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using iesi = Iesi.Collections.Generic;
+using Microsoft.Practices.EnterpriseLibrary.Validation;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
 /*
 drop table INVOICE
 
@@ -28,7 +30,10 @@ namespace Invoices.Domain.Model.Invoice
 {
     public class Invoice
     {
+        [StringLengthValidator(20, 25, MessageTemplate = "Imie powinno mieć od 20 do 25 znaków")]
+        [RegexValidator("FAK.[0-9]{1-3}.[0-9]{1-2}.[0-9]{1-2}.*", MessageTemplate = "Tylko litery")]
         public virtual string ID { get; set; }
+        [StringLengthValidator(0, 50, MessageTemplate = "Tytuł powinien zawierać od 0 do 50 znaków.")]
         public virtual string Title
         {
             get
@@ -69,6 +74,7 @@ namespace Invoices.Domain.Model.Invoice
             }
         }
         private Client.Client _contractor;
+        [StringLengthValidator(0, 250, MessageTemplate = "Komentarz powinien zawierać od 0 do 250 znaków.")]
         public virtual string Comments
         {
             get
@@ -222,8 +228,15 @@ namespace Invoices.Domain.Model.Invoice
             if (Contractor != null)
                 stringCon = Contractor.FormatString();
             string pr = "";
-            foreach (Item a in ListOfProducts)
-                pr += a.FormatString() + "\n";
+            try
+            {
+                foreach (Item a in ListOfProducts)
+                    pr += a.FormatString() + "\n";
+            }
+            catch(Exception)
+            {
+
+            }
             string text = String.Format("ID: {1}{0}{7}{0}Title: {2}{0}{7}{0}Date of create: {3}{0}{7}{0}Właściciel:{0}{0}{4}{0}{7}{0}List of Productds:{0}{0}{5}{0}{7}{0}Comments:{0}{6}{0}{7}{0}",
                 Environment.NewLine, ID, Title, DateOfCreate.ToString(), stringCon, pr, Comments,przerwa);
             return text;
@@ -239,6 +252,14 @@ namespace Invoices.Domain.Model.Invoice
             string text = String.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}{0}{6}",
                 Environment.NewLine, ID, Title, DateOfCreate.ToString(), stringCon, pr, Comments);
             return text;
+        }
+        [SelfValidation]
+        public virtual void InvoiceValidation(ValidationResults results)
+        {
+            if (DateTime.Compare(DateOfCreate,new DateTime(2015,05,10))<0)
+                results.AddResult(new ValidationResult("Błędna data utworzenia", this, "InvoiceValidation", string.Empty, null));
+            if(ListOfProducts==null||Contractor==null)
+                results.AddResult(new ValidationResult("Lista zamówień lub klient są null-ami", this, "InvoiceValidation", string.Empty, null));
         }
     }
 }

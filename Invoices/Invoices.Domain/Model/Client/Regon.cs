@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Practices.EnterpriseLibrary.Validation;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
 
 namespace Invoices.Domain.Model.Client
 {
+    [HasSelfValidation]
     public class Regon
     {
         public virtual string NumberRegon { get; set; }
@@ -84,6 +87,12 @@ namespace Invoices.Domain.Model.Client
         public override string ToString()
         {
             return this.NumberRegon;
+        }
+        [SelfValidation]
+        public virtual void NumberRegonValidation(ValidationResults results)
+        {
+            if (!Regon9Znakowy(NumberRegon) && !Regon14Zankowy(NumberRegon))
+                results.AddResult(new ValidationResult("Błedny regon", this, "NumberRegonValidation", string.Empty, null));
         }
     }
 }

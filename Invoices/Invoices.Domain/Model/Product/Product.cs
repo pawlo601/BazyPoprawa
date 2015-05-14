@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Practices.EnterpriseLibrary.Validation;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
 /*
 drop table PRODUCT
 go
@@ -29,12 +31,18 @@ GO
 namespace Invoices.Domain.Model.Product
 {
     public enum TypProduktu { Przedmiot, Usługa };
+    [HasSelfValidation]
     public class Product
     {
         public virtual int ID { get; set; }
+
+        [StringLengthValidator(3, 15, MessageTemplate = "Imie powinno mieć od 3 do 15 znaków")]
+        [RegexValidator("[A-Z]{1}[a-z]{2-14}", MessageTemplate="Tylko litery")]
         public virtual string Name { get; set; }
         public virtual TypProduktu Type { get; set; }
+        
         public virtual Price Price { get; set; }
+        [StringLengthValidator(0, 250, MessageTemplate = "Komentarz powinien zawierać od 0 do 250 znaków.")]
         public virtual string Comments
         {
             get

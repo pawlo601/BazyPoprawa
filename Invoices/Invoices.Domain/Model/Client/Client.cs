@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using iesi=Iesi.Collections.Generic;
+using Microsoft.Practices.EnterpriseLibrary.Validation;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
 /*
 drop table CLIENT
 go
@@ -29,7 +31,11 @@ namespace Invoices.Domain.Model.Client
     public class Client
     {
         public virtual int ID { get; set; }
+        [StringLengthValidator(3, 10, MessageTemplate = "Imie powinno mieć od 3 do 10 znaków")]
+        [RegexValidator("[A-Z]{1}[a-z]{2-9}", MessageTemplate = "Tylko litery")]
         public virtual string Name { get; set; }
+        [StringLengthValidator(3, 20, MessageTemplate = "Imie powinno mieć od 3 do 20 znaków")]
+        [RegexValidator("[A-Z]{1}[a-z]{2-19}", MessageTemplate = "Tylko litery")]
         public virtual string Surname { get; set; }
         public virtual Address Localisation { get; set; }
         public virtual iesi.ISet<Contact> ListOfContact { get; set; }
@@ -91,15 +97,29 @@ namespace Invoices.Domain.Model.Client
                                     String.Format("{0}Adres:{0}{1}{0}", Environment.NewLine, Localisation.FormatString()) +
                                     "====================================" +
                                     String.Format("{0}Kontakty:{0}", Environment.NewLine);
-            foreach (Contact a in ListOfContact)
-                text += String.Format("{0}------------------------------------{0}{1}", 
-                                       Environment.NewLine, 
-                                       a.FormatString());
+            try
+            {
+                foreach (Contact a in ListOfContact)
+                    text += String.Format("{0}------------------------------------{0}{1}",
+                                           Environment.NewLine,
+                                           a.FormatString());
+            }
+            catch(Exception)
+            {
+
+            }
             text += String.Format("{0}===================================={0}",
                     Environment.NewLine) +
                                     String.Format("Zniżki:{0}{0}", Environment.NewLine);
-            foreach (Discount a in ListOfDiscount)
-                text += String.Format("------------------------------------{0}{1}{0}", Environment.NewLine, a.FormatString());
+            try
+            {
+                foreach (Discount a in ListOfDiscount)
+                    text += String.Format("------------------------------------{0}{1}{0}", Environment.NewLine, a.FormatString());
+            }
+            catch(Exception)
+            {
+
+            }
             text += String.Format("===================================={0}",
                     Environment.NewLine);
             return text;
@@ -117,6 +137,15 @@ namespace Invoices.Domain.Model.Client
             foreach (Discount a in ListOfDiscount)
                 text += a.ToString() + "\n";
             return text;
+        }
+        [SelfValidation]
+        public virtual void Validation(ValidationResults results)
+        {
+            if (Localisation == null ||
+                ListOfContact == null ||
+                ListOfDiscount == null)
+                results.AddResult(new ValidationResult("Lokalizacja, lista kontaktów oraz zniżek nie powinna być null", 
+                                                        this, "Validation", string.Empty, null));
         }
     }
 }

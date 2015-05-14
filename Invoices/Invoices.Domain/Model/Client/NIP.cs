@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Practices.EnterpriseLibrary.Validation;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
 
 namespace Invoices.Domain.Model.Client
 {
+    [HasSelfValidation]
     public class NIP
     {
         public virtual string NumberNIP { get; set; }
@@ -14,6 +17,11 @@ namespace Invoices.Domain.Model.Client
             this.NumberNIP = "0000000000";
         }
         public NIP(string number)
+        {
+            if(NipChecker(number))
+                this.NumberNIP=number;
+        }
+        private bool NipChecker(string number)
         {
             if (number.Length != 10)
                 throw new Exception("Błąd w NIP-ie. Zła długość.\n");
@@ -35,7 +43,7 @@ namespace Invoices.Domain.Model.Client
                     7 * numbers[8];
                 sum %= 11;
                 if (sum == numbers[9])
-                    this.NumberNIP = number;
+                    return true;
                 else
                     throw new Exception("Błąd w NIP-ie. Niepoprawne znaczenie.\n");
             }
@@ -47,6 +55,18 @@ namespace Invoices.Domain.Model.Client
         public override string ToString()
         {
             return NumberNIP;
+        }
+        [SelfValidation]
+        public virtual void NumberRegonValidation(ValidationResults results)
+        {
+            try
+            {
+                NipChecker(NumberNIP);
+            }
+            catch (Exception)
+            {
+                results.AddResult(new ValidationResult("Błedny nip", this, "NumberRegonValidation", string.Empty, null));
+            }
         }
     }
 }

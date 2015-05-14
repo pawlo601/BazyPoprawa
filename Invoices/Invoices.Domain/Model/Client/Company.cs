@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Practices.EnterpriseLibrary.Validation;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
 /*
 drop table COMPANY
 go
@@ -27,13 +29,14 @@ GO
  */
 namespace Invoices.Domain.Model.Client
 {
-    public class Company:Client
+    [HasSelfValidation]
+    public class Company : Client
     {
         public virtual NIP Nip { get; set; }
         public virtual Regon Regon { get; set; }
 
         public Company()
-            :base()
+            : base()
         {
             Random rand = new Random();
             this.Name = "Nazwa firmy";
@@ -43,7 +46,7 @@ namespace Invoices.Domain.Model.Client
             this.Regon = new Regon();
         }
         public Company(string name, Address loc, NIP nip, Regon regon)
-            :base(name, null,loc)
+            : base(name, null, loc)
         {
             Nip = nip;
             Regon = regon;
@@ -52,7 +55,7 @@ namespace Invoices.Domain.Model.Client
         {
             string text = String.Format("ID firmy: {1}{0}", Environment.NewLine, ID.ToString()) +
                                     "====================================" +
-                                    String.Format("{0}Dane:{0}{1}{0}", Environment.NewLine, Name ) +
+                                    String.Format("{0}Dane:{0}{1}{0}", Environment.NewLine, Name) +
                                     "====================================" +
                                     String.Format("{0}{1}{0}{2}{0}", Environment.NewLine, Nip.FormatString(), Regon.FormatString()) +
                                     "====================================" +
@@ -86,6 +89,12 @@ namespace Invoices.Domain.Model.Client
             foreach (Discount a in ListOfDiscount)
                 text += a.ToString() + "\n";
             return text;
+        }
+        [SelfValidation]
+        public virtual void Validation(ValidationResults results)
+        {
+            if (Nip == null || Regon == null)
+                results.AddResult(new ValidationResult("Nip ani regon nie powinny być null", this, "Validation", string.Empty, null));
         }
     }
 }
